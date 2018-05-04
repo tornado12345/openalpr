@@ -47,9 +47,6 @@ if ( NOT DEFINED WITH_BINDING_JAVA )
   SET(WITH_BINDING_JAVA ON)
 ENDIF()
 
-if ( NOT DEFINED WITH_BINDING_C )
-  SET(WITH_BINDING_C ON)
-ENDIF()
           
 if ( NOT DEFINED WITH_BINDING_PYTHON )
   SET(WITH_BINDING_PYTHON ON)
@@ -174,6 +171,7 @@ IF (WITH_DAEMON)
     daemon/beanstalk.cc 
 )
 
+  FIND_PACKAGE( CURL REQUIRED )
   FIND_PACKAGE( log4cplus REQUIRED )
 
   TARGET_LINK_LIBRARIES(alprd
@@ -208,9 +206,6 @@ if (WITH_BINDING_PYTHON)
 add_subdirectory(bindings/python)
 ENDIF()
         
-if (WITH_BINDING_C)
-add_subdirectory(bindings/c)
-ENDIF()
 
 if (WITH_BINDING_GO)
     set(OPENALPR_LIB_GO openalprgo)
